@@ -1,7 +1,7 @@
 import { S3 } from 'aws-sdk';
 
 const s3 = new S3({
-  region: 'your-region', // z.B. 'eu-central-1'
+  region: 'us-east-1', // z.B. 'eu-central-1'
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     const { fileName, fileType } = req.body;
 
     const params = {
-      Bucket: 'your-s3-bucket', // Name deines S3 Buckets
+      Bucket: 'bucket-mit-cooli-bilder', // Name deines S3 Buckets
       Key: fileName,
       Expires: 60,
       ContentType: fileType,
