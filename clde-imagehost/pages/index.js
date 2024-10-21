@@ -14,7 +14,7 @@ function Header() {
   return (
     <header className="flex justify-between items-center bg-white p-4 text-black fixed top-0 left-0 w-full z-50">
       <div className="text-lg font-bold">
-        hOST - Imagehoster
+        POST - Imagehoster
       </div>
       <Image
         className="light"
