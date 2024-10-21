@@ -14,7 +14,7 @@ function Header() {
   return (
     <header className="flex justify-between items-center bg-white p-4 text-black fixed top-0 left-0 w-full z-50">
       <div className="text-lg font-bold">
-        POST - Imagehoster
+        hOST - Imagehoster
       </div>
       <Image
         className="light"
@@ -73,6 +73,9 @@ export function Body() {
           />
         </div>
       </div>
+      <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+        Hochladen
+      </button>
     </div>
   );
 }
