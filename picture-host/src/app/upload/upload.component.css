@@ -1,0 +1,9 @@
+.upload-container {
+    max-width: 400px;
+    height: 400px; /* Set your desired height */
+    width: 100%; /* Set your desired width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
