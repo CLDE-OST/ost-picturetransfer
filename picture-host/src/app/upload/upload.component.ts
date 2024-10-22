@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { S3Client, ListObjectsCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import { MatCardModule } from '@angular/material/card';
 
+
 @Component({
   selector: 'app-upload',
   imports: [CommonModule,MatCardModule],
@@ -21,9 +22,9 @@ export class UploadComponent {
   constructor() {
     this.s3Client = new S3Client({
       credentials: {
-        accessKeyId: 'ASIAY74IA2MFQDYLTKGV',
-        secretAccessKey: '1bORWfJ8M0Kh7MuN20xx4LHZ81Gn2sz1f61m8dFd',
-        sessionToken: 'IQoJb3JpZ2luX2VjECgaCXVzLXdlc3QtMiJGMEQCICNeZaChy0B/oaMaPac6S3UsRM4DZd0YGXoxWvDsgB0BAiBUWqAo1ue4efvZGun0ezpngT4Tyg3C2ywX+eCexr3WFSq7AgiR//////////8BEAAaDDYxODIyMzY4NjQxMSIMzFzRwp0DoJOv3BJiKo8ChQfRllIbmBxMTVS88NnMuhHucJTgHbunfcgHdU77OpuRjHslFj8EeULdq0PaJsaEWnT66RwJvlAJjslTDn9xx/X7EzCj30BioZjNMolZ/GEPIAqf0orZx4ZSV5NDSoIKDFPA1DsgB0iTgpbAZOfpjyFWNmBl+8p0z3dKRREM2EdJ38I6w7XtpJ4ckmkZTWw3w7+04DqfdoPvhdzqcMtgbt+Ggqaa42t38y6tQsFDNotpenbbN4DQaPnRkrr+5wiqamZVZenF5EivMauqZ6HB5Ao5dYZOoT5BzG7/Yu+YTRt03fTM5O5rzNMxKo9NF7QEjiow6arq0kQ9JBi+AB7zJkstHWB5BVkUHJchLNZrCDCf5dm4BjqeATNw0kYqUgkIVrSm/SPaUQD4Zac6QxB0t7rwJ/BdsFJGdOS0lxRNqRB93vsbubAbfQy2bAhlu5JMcVUuqc/ijpi0o5/dtCmMWgxr6syQEm3wyK/V32DVgkKGIh/xQVk+NaZ61OIkBTrZ9J2/VfXnyBwJgEL81Tck+FQLrvfKyQFOL+l9ctXw40rNuOMzlWK0an1vSGCQsTwQRX3TaEOi',
+        accessKeyId: '-',
+        secretAccessKey: '-',
+        sessionToken: '-',
       },
       region: 'us-east-1',
     });
