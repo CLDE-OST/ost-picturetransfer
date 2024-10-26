@@ -69,6 +69,8 @@ console.log('Bucket:', this.bucketName);
     try {
       const data = await this.s3Client.send(new PutObjectCommand(uploadParams));
       console.log('Upload erfolgreich:', data);
+      const imageUrl = `https://${this.bucketName}.s3.amazonaws.com/${uploadParams.Key}`;
+      console.log('Bild-URL:', imageUrl);
     } catch (err) {
       console.error('Fehler beim Hochladen:', err);
     }
