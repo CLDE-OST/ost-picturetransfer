@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { S3Client, ListObjectsCommand, PutObjectCommand } from "@aws-sdk/client-s3";
-import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
   selector: 'app-upload',
-  imports: [CommonModule,MatCardModule],
+  imports: [CommonModule],
   standalone: true,
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.css']
