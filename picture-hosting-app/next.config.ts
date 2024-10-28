@@ -14,6 +14,9 @@ module.exports = {
     AWS_REGION: process.env.AWS_REGION,
     S3_BUCKET_NAME: process.env.S3_BUCKET_NAME,
   },
+      images: {
+        domains: ['bucket-mit-cooli-bilder.s3.us-east-1.amazonaws.com'],
+      },
 };
 
 const nextConfig: NextConfig = {

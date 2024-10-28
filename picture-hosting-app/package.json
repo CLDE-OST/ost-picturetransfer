@@ -13,6 +13,7 @@
     "@aws-sdk/client-s3": "^3.679.0",
     "@aws-sdk/lib-dynamodb": "^3.679.0",
     "@nextui-org/navbar": "^2.0.37",
+    "@nextui-org/react": "^2.4.8",
     "@nextui-org/system": "^2.2.6",
     "@nextui-org/theme": "^2.2.11",
     "axios": "^1.7.7",
