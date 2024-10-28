@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { use } from 'react';
+import Header from '../../../components/Header/Header';
+import Footer from '../../../components/Footer/Footer';
 
 export default function ViewImage({ params }: { params: Promise<{ imageId: string }> }) {
   const { imageId } = use(params); // Entpacke das Promise mit React.use()
@@ -23,6 +25,7 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
 
   return (
     <div>
+      <Header />
       <h2>Bild anzeigen</h2>
       <input 
         type="password" 
@@ -40,6 +43,8 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
           <img src={imageUrl} alt="Angezeigtes Bild" />
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }
