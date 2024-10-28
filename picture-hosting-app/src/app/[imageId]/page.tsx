@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { use } from 'react';
@@ -22,10 +21,14 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
       const response = await axios.post("/api/view", { imageId, password });
       setImageUrl(response.data.imageUrl);
       setErrorMessage("");
-    } catch (error: any) {
-      setErrorMessage(
-        error.response?.data?.message || "Fehler beim Abrufen des Bildes"
-      );
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        setErrorMessage(
+          error.response?.data?.message || "Fehler beim Abrufen des Bildes"
+        );
+      } else {
+        setErrorMessage("Ein unbekannter Fehler ist aufgetreten");
+      }
     }
   };
 

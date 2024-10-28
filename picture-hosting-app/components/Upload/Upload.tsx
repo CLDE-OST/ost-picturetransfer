@@ -1,10 +1,11 @@
-import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@nextui-org/react";
+import {Card, CardHeader, CardBody, Divider} from "@nextui-org/react";
 import React, { useState } from 'react';
 import { Input } from '@nextui-org/react';
 import { Tooltip } from '@nextui-org/react';
 import { Button } from '@nextui-org/react';
 import axios from 'axios';
 import { Snippet } from '@nextui-org/react';
+import { AxiosError } from "axios";
 
 export default function App() {
 
@@ -23,9 +24,15 @@ export default function App() {
           console.log("Upload erfolgreich:", response.data);
           setUploadLink(response.data.link); // Generierten Link speichern
           setErrorMessage(''); // Fehler zurücksetzen, falls der Upload erfolgreich war
-        } catch (error: any) {
+        } catch (error: unknown) {
+          if (axios.isAxiosError(error)) {
+            const axiosError = error as AxiosError;
+            const errorResponse = axiosError.response?.data as { message?: string };
+            setErrorMessage(errorResponse?.message || 'Fehler beim Upload');
+          } else {
+            setErrorMessage('Fehler beim Upload');
+          }
           console.error("Fehler beim Upload:", error);
-          setErrorMessage(error.response?.data?.message || 'Fehler beim Upload');
         }
       };
       reader.readAsDataURL(file);
