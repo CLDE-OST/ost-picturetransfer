@@ -1,5 +1,4 @@
 "use client";
-import React, { useState } from 'react';
 import Upload from "../../components/Upload/Upload";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
