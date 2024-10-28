@@ -5,7 +5,6 @@ import { Tooltip } from '@nextui-org/react';
 import { Button } from '@nextui-org/react';
 import axios from 'axios';
 import { Snippet } from '@nextui-org/react';
-import { AxiosError } from "axios";
 
 export default function App() {
 

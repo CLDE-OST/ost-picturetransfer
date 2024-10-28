@@ -63,7 +63,8 @@ export async function POST(req: NextRequest) {
     console.log("Datenbank erfolgreich aktualisiert.");
 
     // Generierter Link für den Benutzer
-    const generatedLink = `http://localhost:3000/${imageId}`;
+    const host = req.headers.get('host') || process.env.HOST_URL;
+    const generatedLink = `${host}/${imageId}`;
 
     return NextResponse.json({ message: 'Bild hochgeladen', link: generatedLink });
   } catch (error) {
