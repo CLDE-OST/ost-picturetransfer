@@ -36,7 +36,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-  <Card className="max-w-md w-full shadow-sm border border-neutral-700 shadow-neutral-800 bg-neutral-800">
+  <Card className="max-w-md w-full shadow-sm border border-neutral-700 shadow-neutral-800 bg-neutral-700">
     <CardHeader className="flex flex-col">
       <p>Upload your Picture</p>
     </CardHeader>
@@ -47,7 +47,7 @@ export default function App() {
     <Divider />
     <CardBody>
       <Tooltip content="Protect your picture with a password">
-        <Input color="primary" type="password" placeholder="Passwort" onChange={(e) => setPassword(e.target.value)} />
+        <Input color="default" type="password" placeholder="Passwort" onChange={(e) => setPassword(e.target.value)} />
       </Tooltip>
     </CardBody>
     <Divider />
