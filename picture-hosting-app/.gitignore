@@ -53,3 +53,5 @@ pnpm-lock.yaml
 dist/
 build/
 out/
+.DS_Store
+app.zip

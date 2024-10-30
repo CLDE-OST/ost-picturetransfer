@@ -1,4 +1,4 @@
-import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@nextui-org/react";
+import {Card, CardHeader, CardBody, Divider} from "@nextui-org/react";
 import React, { useState } from 'react';
 import { Input } from '@nextui-org/react';
 import { Tooltip } from '@nextui-org/react';
@@ -23,9 +23,13 @@ export default function App() {
           console.log("Upload erfolgreich:", response.data);
           setUploadLink(response.data.link); // Generierten Link speichern
           setErrorMessage(''); // Fehler zurücksetzen, falls der Upload erfolgreich war
-        } catch (error: any) {
+        } catch (error: unknown) {
           console.error("Fehler beim Upload:", error);
-          setErrorMessage(error.response?.data?.message || 'Fehler beim Upload');
+          if (axios.isAxiosError(error)) {
+            setErrorMessage(error.response?.data?.message || 'Fehler beim Upload');
+          } else {
+            setErrorMessage('Unbekannter Fehler beim Upload');
+          }
         }
       };
       reader.readAsDataURL(file);
@@ -57,7 +61,7 @@ export default function App() {
     <Divider />
     </Card>
     {(errorMessage || uploadLink) && (
-      <div className="max-w-md w-full mt-4">
+      <div className="mt-4">
             {errorMessage && (
             <div>
               <Snippet hideSymbol hideCopyButton color="warning">{errorMessage}</Snippet>
