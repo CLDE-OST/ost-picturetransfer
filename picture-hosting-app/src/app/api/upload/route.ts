@@ -5,20 +5,20 @@ import { PutCommand } from '@aws-sdk/lib-dynamodb';
 import bcrypt from 'bcryptjs';
 
 const s3 = new S3Client({
-  region: process.env.AWS_REGION,
+  region: process.env.ENV_AWS_REGION,
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-    sessionToken: process.env.AWS_SESSION_TOKEN!,
+    accessKeyId: process.env.ENV_AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.ENV_AWS_SECRET_ACCESS_KEY!,
+    sessionToken: process.env.ENV_AWS_SESSION_TOKEN!,
   },
 });
 
 const dynamoDb = new DynamoDBClient({
-  region: process.env.AWS_REGION,
+  region: process.env.ENV_AWS_REGION,
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-    sessionToken: process.env.AWS_SESSION_TOKEN!,
+    accessKeyId: process.env.ENV_AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.ENV_AWS_SECRET_ACCESS_KEY!,
+    sessionToken: process.env.ENV_AWS_SESSION_TOKEN!,
   },
 });
 
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
   try {
     // Bild in S3 hochladen
     const uploadParams = {
-      Bucket: process.env.S3_BUCKET_NAME!,
+      Bucket: process.env.ENV_S3_BUCKET_NAME!,
       Key: `${imageId}.jpg`,
       Body: Buffer.from(file, 'base64'),
       ContentType: 'image/jpeg',
@@ -40,11 +40,11 @@ export async function POST(req: NextRequest) {
 
     // Debugging-Logs zur Verfolgung
     console.log("========== DEBUGGING START ==========");
-    console.log("AWS Region:", process.env.AWS_REGION);
-    console.log("S3 Bucket Name:", process.env.S3_BUCKET_NAME);
+    console.log("AWS Region:", process.env.ENV_AWS_REGION);
+    console.log("S3 Bucket Name:", process.env.ENV_S3_BUCKET_NAME);
     console.log("Image ID:", imageId);
     console.log("Hashed Password:", hashedPassword);
-    console.log("Image URL:", `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${imageId}.jpg`);
+    console.log("Image URL:", `https://${process.env.ENV_S3_BUCKET_NAME}.s3.${process.env.ENV_AWS_REGION}.amazonaws.com/${imageId}.jpg`);
     console.log("========== DEBUGGING END ==========");
 
     // Daten in DynamoDB speichern
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
       TableName: 'images', // Sicherstellen, dass der Tabellenname korrekt ist
       Item: {
         imageID: imageId, // Partition Key: muss genau so benannt werden
-        imageUrl: `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${imageId}.jpg`,
+        imageUrl: `https://${process.env.ENV_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${imageId}.jpg`,
         hashedPassword,
         uploadDate: new Date().toISOString(),
       },

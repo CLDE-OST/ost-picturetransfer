@@ -61,7 +61,7 @@ export default function App() {
     <Divider />
     </Card>
     {(errorMessage || uploadLink) && (
-      <div className="max-w-md w-full mt-4">
+      <div className="mt-4">
             {errorMessage && (
             <div>
               <Snippet hideSymbol hideCopyButton color="warning">{errorMessage}</Snippet>
