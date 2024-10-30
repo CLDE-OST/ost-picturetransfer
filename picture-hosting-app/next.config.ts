@@ -7,6 +7,7 @@ console.log("AWS_REGION:", process.env.AWS_REGION);
 console.log("S3_BUCKET_NAME:", process.env.S3_BUCKET_NAME);
 
 module.exports = {
+  basePath: 'picture-hosting-app',
   reactStrictMode: true,
   env: {
     AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
