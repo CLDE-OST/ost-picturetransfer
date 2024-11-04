@@ -45,20 +45,21 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
         <main className="flex flex-1 flex-col items-center justify-center">
           {imageUrl ? (
             <Image
-              width={1280}
+              height={700}
               src={imageUrl}
               alt="Angezeigtes Bild"
             />
           ) : (
             <>
-              <Input className="m-4 w-50"
+            {errorMessage && <Snippet hideCopyButton hideSymbol color="danger" >{errorMessage}</Snippet>}
+              <Input variant="bordered" className="m-4 w-50"
                 type="password"
                 placeholder="Passwort eingeben"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Button className="m-4" onClick={handleView}>Bild anzeigen</Button>
-              {errorMessage && <Snippet hideCopyButton hideSymbol color="danger" >{errorMessage}</Snippet>}
+              <Button color="secondary" onClick={handleView}>Bild anzeigen</Button>
+              
             </>
           )}
         </main>

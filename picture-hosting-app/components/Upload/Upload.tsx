@@ -1,4 +1,4 @@
-import {Card, CardHeader, CardBody, Divider} from "@nextui-org/react";
+import {Card, CardHeader, CardBody, Divider, CardFooter} from "@nextui-org/react";
 import React, { useState } from 'react';
 import { Input } from '@nextui-org/react';
 import { Tooltip } from '@nextui-org/react';
@@ -39,28 +39,40 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-  <Card className="max-w-md w-full shadow-sm border border-neutral-700 shadow-neutral-800 bg-neutral-700">
+    <div className="grid grid-cols-12 gap-5">
+  <Card className="col-start-5 col-end-9 shadow-sm border border-neutral-700 shadow-neutral-800 bg-neutral-800">
     <CardHeader className="flex flex-col">
-      <p>Upload your Picture</p>
+      <p className="font-black">Upload your Picture</p>
     </CardHeader>
     <Divider />
-    <CardBody>
-      <input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+    <CardBody className="flex flex-col">
+      <input 
+        type="file" 
+        accept="image/*" 
+        onChange={(e) => {
+          const selectedFile = e.target.files?.[0] || null;
+          if (selectedFile) {
+            if (selectedFile.size > 2 * 1024 * 1024) {
+              setErrorMessage('Die Datei darf maximal 2 MB groß sein.');
+              setFile(null);
+            } else {
+              setErrorMessage('');
+              setFile(selectedFile);
+            }
+          }
+        }} 
+      />
     </CardBody>
     <Divider />
-    <CardBody>
+    <CardBody className="flex flex-col">
       <Tooltip content="Protect your picture with a password">
-        <Input color="default" type="password" placeholder="Passwort" onChange={(e) => setPassword(e.target.value)} />
+        <Input color="default" variant="bordered" type="password" placeholder="Passwort" onChange={(e) => setPassword(e.target.value)} />
       </Tooltip>
     </CardBody>
     <Divider />
-    <CardBody>
+    <CardFooter className="flex flex-col">
       <Button onClick={handleUpload} color="primary">Bild hochladen</Button>
-    </CardBody>
-    <Divider />
-    </Card>
-    {(errorMessage || uploadLink) && (
+      {(errorMessage || uploadLink) && (
       <div className="mt-4">
             {errorMessage && (
             <div>
@@ -74,6 +86,10 @@ export default function App() {
             )}
       </div>
     )}
+    </CardFooter>
+
+    </Card>
+    
 </div>
   );
 }
