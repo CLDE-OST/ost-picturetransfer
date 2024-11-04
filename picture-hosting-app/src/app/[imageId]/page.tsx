@@ -45,7 +45,7 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
         <main className="flex flex-1 flex-col items-center justify-center">
           {imageUrl ? (
             <Image
-              width={1280}
+              height={700}
               src={imageUrl}
               alt="Angezeigtes Bild"
             />

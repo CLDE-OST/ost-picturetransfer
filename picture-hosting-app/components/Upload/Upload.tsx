@@ -46,7 +46,22 @@ export default function App() {
     </CardHeader>
     <Divider />
     <CardBody className="flex flex-col">
-      <input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+      <input 
+        type="file" 
+        accept="image/*" 
+        onChange={(e) => {
+          const selectedFile = e.target.files?.[0] || null;
+          if (selectedFile) {
+            if (selectedFile.size > 2 * 1024 * 1024) {
+              setErrorMessage('Die Datei darf maximal 2 MB groß sein.');
+              setFile(null);
+            } else {
+              setErrorMessage('');
+              setFile(selectedFile);
+            }
+          }
+        }} 
+      />
     </CardBody>
     <Divider />
     <CardBody className="flex flex-col">
