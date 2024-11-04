@@ -51,6 +51,7 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
             />
           ) : (
             <>
+            {errorMessage && <Snippet hideCopyButton hideSymbol color="danger" >{errorMessage}</Snippet>}
               <Input variant="bordered" className="m-4 w-50"
                 type="password"
                 placeholder="Passwort eingeben"
@@ -58,7 +59,7 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
                 onChange={(e) => setPassword(e.target.value)}
               />
               <Button color="secondary" onClick={handleView}>Bild anzeigen</Button>
-              {errorMessage && <Snippet hideCopyButton hideSymbol color="danger" >{errorMessage}</Snippet>}
+              
             </>
           )}
         </main>
