@@ -1,6 +1,12 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
+1. Clone the repository
+`git clone https://github.com/CLDE-OST/ost-picturetransfer.git`
+2. Move to directory
+`cd ost-picturetransfer`
+
+
 
 First, run the development server:
 
