@@ -30,7 +30,7 @@ Change on every line region, bucket, tablename accordingly to your bucket, dynam
 
 6. Git commit the changes to your repo.
 7. Connect to your EC2 Instance via SSH
-8. Connected to your instance `sudo apt install`
+8. Connected to your instance `sudo apt install` and `sudo apt update` then `sudo apt install npm`
 9. Git clone your repo ```git clone your.repo```
 10. Navigate ```cd ost-picturetransfer```
 11. Inside ```npm install```
