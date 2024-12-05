@@ -1,8 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
+import 'dotenv/config';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { PutCommand } from '@aws-sdk/lib-dynamodb';
 import bcrypt from 'bcryptjs';
+
+//Debugging-Logs zur Überprüfung, ob die Credentials Variablen geladen werden
+console.log("AWS_ACCESS_KEY_ID:", process.env.aws_access_key_id);
+console.log("AWS_SECRET_ACCESS_KEY:", process.env.aws_secret_access_key);
+console.log("AWS_SESSION_TOKEN:", process.env.aws_session_token);
+
 
 const s3 = new S3Client({
   region: 'us-east-1',
