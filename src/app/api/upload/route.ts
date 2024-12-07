@@ -35,6 +35,8 @@ const dynamoDb = new DynamoDBClient({
 export async function POST(req: NextRequest) {
   const { file, password } = await req.json();           //Die Anfrage enhält  file (base64-format) und PW
   const imageId = Date.now().toString();                 //Unique ID erstellen, um das Bild eindeutig zu indentifizieren
+  const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  const uniqueId = `${imageId}${randomString}`;
   const hashedPassword = bcrypt.hashSync(password, 10);  //Bild wir mir gehasht, bevor es gespeichert wird
 
   try {
