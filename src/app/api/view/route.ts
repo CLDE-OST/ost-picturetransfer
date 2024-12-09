@@ -2,13 +2,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { GetCommand } from '@aws-sdk/lib-dynamodb';
 import bcrypt from 'bcryptjs';
+import { loadSecrets } from '../../../../loadSecrets'; // Pfad zur loadSecrets.ts sicherstellen
 
+// Secrets laden
+const secrets = loadSecrets();
+
+// DynamoDB-Client initialisieren
 const dynamoDb = new DynamoDBClient({
   region: 'us-east-1',
   credentials: {
-    accessKeyId: process.env.aws_access_key_id!,
-    secretAccessKey: process.env.aws_secret_access_key!,
-    sessionToken: process.env.aws_session_token!,
+    accessKeyId: secrets.AWS_ACCESS_KEY_ID,
+    secretAccessKey: secrets.AWS_SECRET_ACCESS_KEY,
+    sessionToken: secrets.AWS_SESSION_TOKEN,
   },
 });
 
@@ -27,19 +32,19 @@ export async function POST(req: NextRequest) {
     const data = await dynamoDb.send(new GetCommand(dbParams));
 
     if (!data.Item) {
-      return NextResponse.json({ message: 'Image not found' }, { status: 404 });
+      return NextResponse.json({ message: 'Bild nicht gefunden' }, { status: 404 });
     }
 
     // Passwort überprüfen
     const isPasswordValid = bcrypt.compareSync(password, data.Item.hashedPassword);
     if (!isPasswordValid) {
-      return NextResponse.json({ message: 'Incorrect password' }, { status: 401 });
+      return NextResponse.json({ message: 'Falsches Passwort' }, { status: 401 });
     }
 
     // Erfolgreich: Image URL zurückgeben
     return NextResponse.json({ imageUrl: data.Item.imageUrl });
   } catch (error) {
-    console.error("Error when retrieving the image", error);
-    return NextResponse.json({ message: 'Error when retrieving the image', error }, { status: 500 });
+    console.error('Fehler beim Abrufen des Bildes:', error);
+    return NextResponse.json({ message: 'Fehler beim Abrufen des Bildes', error }, { status: 500 });
   }
 }

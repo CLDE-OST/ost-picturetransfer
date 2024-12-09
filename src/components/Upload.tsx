@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from "@/components/ui/button";
 import axios from 'axios';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, Clipboard, Loader2, Upload } from 'lucide-react';
+import { AlertCircle, Clipboard, Loader2} from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false); // Ladezustand
 
   const handleUpload = async () => {
-    if (file && password) {
+    if (file && password) {n
       setIsLoading(true); // Ladezustand aktivieren
       const reader = new FileReader();
       reader.onload = async () => {
