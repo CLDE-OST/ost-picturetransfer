@@ -16,7 +16,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false); // Ladezustand
 
   const handleUpload = async () => {
-    if (file && password) {
+    if (file && password) {n
       setIsLoading(true); // Ladezustand aktivieren
       const reader = new FileReader();
       reader.onload = async () => {

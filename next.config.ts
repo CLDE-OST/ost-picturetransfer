@@ -1,11 +1,11 @@
-import type { NextConfig } from "next";
-require('dotenv').config();
+import type { NextConfig } from 'next';
+import { loadSecrets } from './loadSecrets';
 
-//console.log("AWS_ACCESS_KEY_ID:", process.env.AWS_ACCESS_KEY_ID);
-//console.log("AWS_SECRET_ACCESS_KEY:", process.env.AWS_SECRET_ACCESS_KEY);
-//console.log("AWS_REGION:", 'us-east-1');
-//console.log("S3_BUCKET_NAME:", 'bucket-mit-cooli-bilder');
-//console.log('ESLint: ignoreDuringBuilds:', true);
+const secrets = loadSecrets(); // Secrets aus dem Secrets Manager laden
+
+console.log("AWS_ACCESS_KEY_ID:", secrets.AWS_ACCESS_KEY_ID);
+console.log("AWS_SECRET_ACCESS_KEY:", secrets.AWS_SECRET_ACCESS_KEY);
+console.log("AWS_SESSION_TOKEN:", secrets.AWS_SESSION_TOKEN);
 
 module.exports = {
   eslint: {
@@ -13,14 +13,20 @@ module.exports = {
   },
   reactStrictMode: true,
   env: {
-    AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
-    AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+    AWS_ACCESS_KEY_ID: secrets.AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY: secrets.AWS_SECRET_ACCESS_KEY,
+    AWS_SESSION_TOKEN: secrets.AWS_SESSION_TOKEN,
     AWS_REGION: 'us-east-1',
     S3_BUCKET_NAME: 'bucket-mit-cooli-bilder',
   },
-      images: {
-        domains: ['bucket-mit-cooli-bilder.s3.us-east-1.amazonaws.com'],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'bucket-mit-cooli-bilder.s3.us-east-1.amazonaws.com',
       },
+    ],
+  },
 };
 
 const nextConfig: NextConfig = {
@@ -28,3 +34,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
