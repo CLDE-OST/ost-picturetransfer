@@ -9,7 +9,11 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
-	"./src/**/*.{js,ts,jsx,tsx,mdx}"
+	"./src/**/*.{js,ts,jsx,tsx,mdx}",
+	"./src/**/**/*.{js,ts,jsx,tsx,mdx}",
+	"./src/**/**/**/*.{js,ts,jsx,tsx,mdx}",
+	"./src/**/**/**/**/*.{js,ts,jsx,tsx,mdx}",
+	"./src/**/**/**/**/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
   	extend: {
@@ -59,6 +63,37 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		animation: {
+  			shine: 'shine var(--duration) infinite linear',
+  			gradient: 'gradient 8s linear infinite',
+  			'shiny-text': 'shiny-text 8s infinite'
+  		},
+  		keyframes: {
+  			shine: {
+  				'0%': {
+  					'background-position': '0% 0%'
+  				},
+  				'50%': {
+  					'background-position': '100% 100%'
+  				},
+  				to: {
+  					'background-position': '0% 0%'
+  				}
+  			},
+  			gradient: {
+  				to: {
+  					backgroundPosition: 'var(--bg-size) 0'
+  				}
+  			},
+  			'shiny-text': {
+  				'0%, 90%, 100%': {
+  					'background-position': 'calc(-100% - var(--shiny-width)) 0'
+  				},
+  				'30%, 60%': {
+  					'background-position': 'calc(100% + var(--shiny-width)) 0'
+  				}
+  			}
   		}
   	}
   },

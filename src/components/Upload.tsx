@@ -4,8 +4,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from "@/components/ui/button";
 import axios from 'axios';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, Clipboard, Loader2} from 'lucide-react';
+import { AlertCircle, Clipboard, Loader2 } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {motion} from "framer-motion";
 
 export default function App() {
   const [file, setFile] = useState<File | null>(null);
@@ -43,7 +44,12 @@ export default function App() {
   };
 
   return (
-    <div className="mx-auto container w-[45%]">
+    <motion.div
+      initial={{ y: 0, scale: 0.4, opacity: 0 }}
+      animate={{ y: 0, scale: 1, opacity: 1 }}
+      transition={{ ease: "circInOut", duration: 1.25,  }}
+    >
+    <div className="mx-auto container w-[33%]">
       <Card className="shadow-sm border">
         <CardHeader>
           <CardTitle>Upload your Image</CardTitle>
@@ -99,7 +105,7 @@ export default function App() {
             <div className="mt-2 w-full">
               {errorMessage && (
                 <div>
-                  <Alert className="mt-2 border-red-500 text-red-500">
+                  <Alert className="mt-2 border-red-500 text-red-500 bg-red-950 bg-opacity-50">
                     <AlertCircle className="h-fit w-fit stroke-red-500" />
                     <AlertTitle className="ml-2">Error</AlertTitle>
                     <AlertDescription className="ml-2">
@@ -136,5 +142,6 @@ export default function App() {
         </CardFooter>
       </Card>
     </div>
+    </motion.div>
   );
 }

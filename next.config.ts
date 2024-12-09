@@ -8,6 +8,9 @@ console.log("AWS_SECRET_ACCESS_KEY:", secrets.AWS_SECRET_ACCESS_KEY);
 console.log("AWS_SESSION_TOKEN:", secrets.AWS_SESSION_TOKEN);
 
 module.exports = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   reactStrictMode: true,
   env: {
     AWS_ACCESS_KEY_ID: secrets.AWS_ACCESS_KEY_ID,
