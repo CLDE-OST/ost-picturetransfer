@@ -27,19 +27,19 @@ export async function POST(req: NextRequest) {
     const data = await dynamoDb.send(new GetCommand(dbParams));
 
     if (!data.Item) {
-      return NextResponse.json({ message: 'Bild nicht gefunden' }, { status: 404 });
+      return NextResponse.json({ message: 'Image not found' }, { status: 404 });
     }
 
     // Passwort überprüfen
     const isPasswordValid = bcrypt.compareSync(password, data.Item.hashedPassword);
     if (!isPasswordValid) {
-      return NextResponse.json({ message: 'Falsches Passwort' }, { status: 401 });
+      return NextResponse.json({ message: 'Incorrect password' }, { status: 401 });
     }
 
     // Erfolgreich: Image URL zurückgeben
     return NextResponse.json({ imageUrl: data.Item.imageUrl });
   } catch (error) {
-    console.error("Fehler beim Abrufen des Bildes:", error);
-    return NextResponse.json({ message: 'Fehler beim Abrufen des Bildes', error }, { status: 500 });
+    console.error("Error when retrieving the image", error);
+    return NextResponse.json({ message: 'Error when retrieving the image', error }, { status: 500 });
   }
 }

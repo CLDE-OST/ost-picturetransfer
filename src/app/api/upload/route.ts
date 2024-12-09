@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
       ContentType: 'image/jpeg',      
     };
     const uploadResult = await s3.send(new PutObjectCommand(uploadParams)); //Hochladen der Datei
-    console.log("Upload-Ergebnis:", uploadResult);                          // Log des Ergebnisobjekt
+    console.log("Upload Results:", uploadResult);                          // Log des Ergebnisobjekt
 
     // Metadaten in DynamoDB speichern, Daten für die Datenbank vorbereiten
     const dbParams = {
@@ -58,18 +58,18 @@ export async function POST(req: NextRequest) {
         uploadDate: new Date().toISOString(),
       },
     };
-    console.log("DynamoDB Eintrag:", JSON.stringify(dbParams, null, 2));
+    console.log("DynamoDB entry:", JSON.stringify(dbParams, null, 2));
 
     await dynamoDb.send(new PutCommand(dbParams));           //Daten speichern
-    console.log("Datenbank erfolgreich aktualisiert.");      //Erfolgs- oder Fehlermeldung
+    console.log("Database successfully updated");      //Erfolgs- oder Fehlermeldung
 
     // Generierter Link für den Benutzer
     const host = req.headers.get('host') || process.env.HOST_URL;  
     const generatedLink = `${host}/${imageId}`;
 
-    return NextResponse.json({ message: 'Bild hochgeladen', link: generatedLink });
+    return NextResponse.json({ message: 'Picture uploaded', link: generatedLink });
   } catch (error) {
-    console.error("Fehler beim Speichern in DynamoDB:", error);
-    return NextResponse.json({ message: 'Fehler beim Speichern in DynamoDB', error }, { status: 500 });
+    console.error("Error when saving in DynamoDB", error);
+    return NextResponse.json({ message: 'Error when saving in DynamoDB', error }, { status: 500 });
   }
 }

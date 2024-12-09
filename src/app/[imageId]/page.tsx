@@ -49,7 +49,7 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
             <Input
               className="m-4 w-50"
               type="password"
-              placeholder="Passwort eingeben"
+              placeholder="Type in password to decrypt image"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -57,10 +57,10 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
               {isLoading ? (
                 <>
                   <Loader2 className="animate-spin mr-2" />
-                  Lädt...
+                  Loading
                 </>
               ) : (
-                "Bild anzeigen"
+                "Show picture"
               )}
             </Button>
           </div>

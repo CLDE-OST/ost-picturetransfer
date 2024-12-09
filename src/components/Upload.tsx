@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from "@/components/ui/button";
 import axios from 'axios';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, Clipboard, Loader2 } from 'lucide-react';
+import { AlertCircle, Clipboard, Loader2, Upload } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 export default function App() {
@@ -22,15 +22,15 @@ export default function App() {
         const base64 = (reader.result as string).split(',')[1];
         try {
           const response = await axios.post('/api/upload', { file: base64, password });
-          console.log("Upload erfolgreich:", response.data);
+          console.log("Upload successful:", response.data);
           setUploadLink(response.data.link); // Generierten Link speichern
           setErrorMessage(''); // Fehler zurücksetzen, falls der Upload erfolgreich war
         } catch (error: unknown) {
-          console.error("Fehler beim Upload:", error);
+          console.error("Error during upload:", error);
           if (axios.isAxiosError(error)) {
-            setErrorMessage(error.response?.data?.message || 'Fehler beim Upload');
+            setErrorMessage(error.response?.data?.message || 'Error during upload');
           } else {
-            setErrorMessage('Unbekannter Fehler beim Upload');
+            setErrorMessage('Unknown error during upload');
           }
         } finally {
           setIsLoading(false); // Ladezustand deaktivieren
@@ -38,7 +38,7 @@ export default function App() {
       };
       reader.readAsDataURL(file);
     } else {
-      setErrorMessage('Bitte Datei und Passwort eingeben.');
+      setErrorMessage('Please enter file and password');
     }
   };
 
@@ -83,14 +83,16 @@ export default function App() {
         </CardContent>
         <CardFooter className="flex flex-col">
           {!uploadLink && (
+            
             <Button onClick={handleUpload} color="primary" disabled={isLoading}>
+              <Upload></Upload>
               {isLoading ? (
                 <>
                   <Loader2 className="animate-spin mr-2" />
-                  Bitte warten
+                  Uploading
                 </>
               ) : (
-                "Bild hochladen"
+                "Upload"
               )}
             </Button>
           )}
@@ -124,7 +126,7 @@ export default function App() {
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent className="w-fit bg-white text-black">
-                        <p>Copied!</p>
+                        <p>Copied to Clipboard</p>
                       </PopoverContent>
                     </Popover>
                   </div>
