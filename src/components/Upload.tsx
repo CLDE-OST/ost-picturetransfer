@@ -7,6 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle, Clipboard, Loader2, Upload } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {motion} from "framer-motion";
+import ShineBorder from "./ui/shine-border";
 
 export default function App() {
   const [file, setFile] = useState<File | null>(null);
@@ -49,7 +50,7 @@ export default function App() {
       animate={{ y: 0, scale: 1, opacity: 1 }}
       transition={{ ease: "circInOut", duration: 1.25,  }}
     >
-    <div className="mx-auto container w-[45%]">
+    <div className="mx-auto container w-[33%]">
       <Card className="shadow-sm border">
         <CardHeader>
           <CardTitle>Upload your Image</CardTitle>

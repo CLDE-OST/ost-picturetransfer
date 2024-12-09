@@ -39,7 +39,7 @@ export default function RootLayout({
          {children}
         </Providers>
         <footer className="z-10 bottom-0 w-full absolute justify-items-center p-3">
-            <p className="text-sm">
+            <p className="text-sm text-muted-foreground">
               © 2024 imgHOST. All rights reserved.
             </p>
         </footer>

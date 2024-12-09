@@ -2,14 +2,17 @@
 import Upload from "@/components/Upload";
 import WordPullUp from "@/components/ui/word-pull-up";
 import { FadeText } from "@/components/ui/fade-text";
+import AnimatedShinyText from "@/components/ui/animated-shiny-text";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
     <main className="flex flex-col h-screen">
-      <section className="flex-1 space-y-12 px-4 flex flex-col py-24">
+      <section className="flex-1 space-y-12 px-4 flex flex-col py-20">
         <div className="container flex flex-col items-center text-center space-y-4 mx-auto">
           <WordPullUp
-            className="text-4xl font-bold tracking-[-0.02em] text-white md:text-7xl md:leading-[5rem]"
+            className="text-6xl font-bold text-white"
             words="Upload Your Images with Ease"
           />
 
@@ -17,7 +20,26 @@ export default function Home() {
             className="max-w-[600px] text-muted-foreground md:text-xl/relaxed"
             text="The fastest and most secure way to share your images. Drag, drop, and share in seconds."
           />
-          
+              <motion.div
+                initial={{ y: 0, scale: 0.4, opacity: 0 }}
+                animate={{ y: 0, scale: 1, opacity: 1 }}
+                transition={{ ease: "circInOut", duration: 1.25 }}
+              >   
+          <div className="z-10 flex items-center justify-center">
+            <div
+              className={cn(
+                "group rounded-full border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+              )}
+            >
+              
+                <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+                  <a href="https://github.com/CLDE-OST/ost-picturetransfer">
+                    <span>🐈‍⬛ GitHub</span>
+                  </a>
+                </AnimatedShinyText>
+            </div>
+          </div>
+          </motion.div>   
         </div>
         <Upload />
       </section>
