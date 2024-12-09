@@ -1,17 +1,16 @@
 "use client";
 import React, { useState } from 'react';
 import axios from 'axios';
-import { use } from 'react';
 import Header from '../../../components/Header/Header';
 import Footer from '../../../components/Footer/Footer';
 import { Image } from '@nextui-org/image';
 import { Input } from '@nextui-org/react';
 import { Button } from '@nextui-org/react';
 import { Snippet } from '@nextui-org/react';
+import { use } from 'react';
 
 export default function ViewImage({ params }: { params: Promise<{ imageId: string }> }) {
-  const { imageId } = use(params); // Entpacke das Promise mit React.use()
-
+  const { imageId } = use(params);
   const [password, setPassword] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
