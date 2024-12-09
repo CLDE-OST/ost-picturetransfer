@@ -4,10 +4,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from "@/components/ui/button";
 import axios from 'axios';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, Clipboard, Loader2, Upload } from 'lucide-react';
+import { AlertCircle, Clipboard, Loader2 } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {motion} from "framer-motion";
-import ShineBorder from "./ui/shine-border";
 
 export default function App() {
   const [file, setFile] = useState<File | null>(null);

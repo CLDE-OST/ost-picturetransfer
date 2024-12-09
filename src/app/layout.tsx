@@ -5,6 +5,7 @@ import { Providers } from "./provider";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "imgHOST",
@@ -20,9 +21,9 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className="overflow-hidden z-10">
         <header className="p-3">
-          <a href="/">
+          <Link href="/">
             <Image src="logo.svg" width={32} height={32} alt="Logo" />
-          </a>
+          </Link>
         </header>
 
         <AnimatedGridPattern

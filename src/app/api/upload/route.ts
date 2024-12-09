@@ -6,9 +6,9 @@ import { PutCommand } from '@aws-sdk/lib-dynamodb';               //Zugriff Dyna
 import bcrypt from 'bcryptjs';                                    // um PW sicher zu hashen
 
 //Debugging-Logs zur Überprüfung, ob die Credentials Variablen aus .env Datei geladen werden
-console.log("AWS_ACCESS_KEY_ID:", process.env.aws_access_key_id);
-console.log("AWS_SECRET_ACCESS_KEY:", process.env.aws_secret_access_key);
-console.log("AWS_SESSION_TOKEN:", process.env.aws_session_token);
+//console.log("AWS_ACCESS_KEY_ID:", process.env.aws_access_key_id);
+//console.log("AWS_SECRET_ACCESS_KEY:", process.env.aws_secret_access_key);
+//console.log("AWS_SESSION_TOKEN:", process.env.aws_session_token);
 
 
 //Initialisierung des AWS-Clients, S3- und DynamoDBClient wird erstellt
