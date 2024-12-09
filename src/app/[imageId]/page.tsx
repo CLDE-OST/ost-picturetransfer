@@ -34,32 +34,29 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
   };
 
   return (
-    <main className="flex min-h-screen flex-col">
-                        <header className="top-0 left-0 m-3">
-              <Image src="logo.svg" width={32} height={32} alt="Logo"/>
-          </header>
-      {/* Hero Section */}
-      <section className="flex-1 flex items-center justify-center">
+    <main className="justify-items-center flex-col">
+      <section className="flex-1 space-y-12 py-24 px-4 h-[80vh] place-content-center">
         {imageUrl ? (
-          <Image height={700} src={imageUrl} alt="Angezeigtes Bild" />
+          <Image  isBlurred height={700} src={imageUrl} alt="Angezeigtes Bild" />
         ) : (
-          <div className="flex flex-col items-center">
+          <div className="container flex flex-col items-center text-center space-y-4 mx-auto">
             {errorMessage && (
               <Snippet hideCopyButton hideSymbol color="danger">
                 {errorMessage}
               </Snippet>
             )}
             <Input
-              className="m-4"
+            className='hover:bg-neutral-950'
+              color="default"
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button color="secondary" onClick={handleView} disabled={isLoading}>
+            <Button color="secondary" className='bg-white' onClick={handleView} disabled={isLoading}>
               {isLoading ? (
                 <>
-                  <Loader2 className="animate-spin mr-2" />
+                  <Loader2 className="animate-spin" />
                   Loading
                 </>
               ) : (
@@ -69,15 +66,6 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
           </div>
         )}
       </section>
-
-      {/* Footer */}
-      <footer className="border-t">
-        <div className="flex place-content-center flex-row p-5 gap-5">
-          <p className="text-sm text-muted-foreground">
-            © 2024 imgHOST. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </main>
   );
 }
