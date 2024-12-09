@@ -1,7 +1,6 @@
 import { Card, CardTitle, CardHeader, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { Tooltip } from '@nextui-org/react';
 import { Button } from "@/components/ui/button";
 import axios from 'axios';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -54,32 +53,31 @@ export default function App() {
           {!uploadLink && (
             <>
               <div className="grid w-full max-w items-center gap-1.5">
-                <Input
-                  id="picture"
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const selectedFile = e.target.files?.[0] || null;
-                    if (selectedFile) {
-                      if (selectedFile.size > 2 * 1024 * 1024) {
-                        setErrorMessage('Die Datei darf maximal 2 MB groß sein.');
-                        setFile(null);
-                      } else {
-                        setErrorMessage('');
-                        setFile(selectedFile);
-                      }
-                    }
-                  }}
-                />
+              <Input
+                id="picture"
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                const selectedFile = e.target.files?.[0] || null;
+                if (selectedFile) {
+                  if (selectedFile.size > 2 * 1024 * 1024) {
+                  setErrorMessage('Die Datei darf maximal 2 MB groß sein.');
+                  setFile(null);
+                  } else {
+                  setErrorMessage('');
+                  setFile(selectedFile);
+                  }
+                }
+                }}
+              />
               </div>
-              <Tooltip placement="bottom" content="Protect your picture with a password">
-                <Input
-                  color="default"
-                  type="password"
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Tooltip>
+              <Input
+                color="default"
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={!file}
+              />
             </>
           )}
         </CardContent>

@@ -5,7 +5,7 @@ import { Image } from '@nextui-org/image';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Snippet } from '@nextui-org/react';
-import { Cloud, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 export default function ViewImage({ params }: { params: Promise<{ imageId: string }> }) {
   const { imageId } = use(params);
