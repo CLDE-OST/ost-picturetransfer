@@ -47,9 +47,9 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
               </Snippet>
             )}
             <Input
-              className="m-4 w-50"
+              className="m-4"
               type="password"
-              placeholder="Type in password to decrypt image"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

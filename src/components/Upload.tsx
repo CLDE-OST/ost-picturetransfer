@@ -85,7 +85,6 @@ export default function App() {
           {!uploadLink && (
             
             <Button onClick={handleUpload} color="primary" disabled={isLoading}>
-              <Upload></Upload>
               {isLoading ? (
                 <>
                   <Loader2 className="animate-spin mr-2" />
@@ -126,7 +125,7 @@ export default function App() {
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent className="w-fit bg-white text-black">
-                        <p>Copied to Clipboard</p>
+                        <p className="text-xs">Copied to Clipboard</p>
                       </PopoverContent>
                     </Popover>
                   </div>
