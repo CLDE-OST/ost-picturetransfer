@@ -35,6 +35,9 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
 
   return (
     <main className="flex min-h-screen flex-col">
+                        <header className="top-0 left-0 m-3">
+              <Image src="logo.svg" width={32} height={32} alt="Logo"/>
+          </header>
       {/* Hero Section */}
       <section className="flex-1 flex items-center justify-center">
         {imageUrl ? (
@@ -71,7 +74,7 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
       <footer className="border-t">
         <div className="flex place-content-center flex-row p-5 gap-5">
           <p className="text-sm text-muted-foreground">
-            © 2024 hOST. All rights reserved.
+            © 2024 imgHOST. All rights reserved.
           </p>
         </div>
       </footer>

@@ -4,7 +4,7 @@ import * as React from "react";
 import {Providers} from "./provider";
 
 export const metadata: Metadata = {
-  title: "picture hOST",
+  title: "imgHOST",
   description: "made with ALOT of pain",
 };
 
