@@ -43,6 +43,13 @@ export default function App() {
     }
   };
 
+  const handleReset = () => {
+    setFile(null);
+    setPassword('');
+    setUploadLink('');
+    setErrorMessage('');
+  };
+
   return (
     <motion.div
       initial={{ y: 0, scale: 0.4, opacity: 0 }}
@@ -116,6 +123,9 @@ export default function App() {
               )}
               {uploadLink && (
                 <div>
+                  <Button onClick={handleReset} className="mb-10 -mt-10 w-full p-10">
+                    Upload more images
+                  </Button>
                   <div className="flex">
                     <Input readOnly value={uploadLink} className="flex-grow" />
                     <Popover>
@@ -135,6 +145,7 @@ export default function App() {
                       </PopoverContent>
                     </Popover>
                   </div>
+
                 </div>
               )}
             </div>

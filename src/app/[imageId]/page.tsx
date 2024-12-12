@@ -6,6 +6,10 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Snippet } from '@nextui-org/react';
 import { Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Badge } from "@/components/ui/badge"
+
+
 
 export default function ViewImage({ params }: { params: Promise<{ imageId: string }> }) {
   const { imageId } = use(params);
@@ -37,13 +41,20 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
     <main className="justify-items-center flex-col">
       <section className="flex-1 space-y-12 py-24 px-4 h-[80vh] place-content-center">
         {imageUrl ? (
+              <motion.div
+              initial={{ y: 0, scale: 0, opacity: 0 }}
+              animate={{ y: 0, scale: 1, opacity: 1 }}
+              transition={{ ease: "circInOut", duration: 0.3,  }}
+              className='-mt-10'
+            >
           <Image  isBlurred height={700} src={imageUrl} alt="Angezeigtes Bild" />
+          </motion.div>
         ) : (
           <div className="container flex flex-col items-center text-center space-y-4 mx-auto">
             {errorMessage && (
-              <Snippet hideCopyButton hideSymbol color="danger">
+              <Badge variant="destructive">
                 {errorMessage}
-              </Snippet>
+              </Badge>
             )}
             <Input
             className='hover:bg-neutral-950'
@@ -69,3 +80,5 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
     </main>
   );
 }
+
+
