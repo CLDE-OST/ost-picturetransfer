@@ -2,33 +2,25 @@ import { NextRequest, NextResponse } from 'next/server';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { GetCommand } from '@aws-sdk/lib-dynamodb';
 import bcrypt from 'bcryptjs';
-import { loadSecrets } from '../../../../loadSecrets'; // Pfad zur loadSecrets.ts sicherstellen
-
-// Secrets laden
-const secrets = loadSecrets();
-
-// DynamoDB-Client initialisieren
-const dynamoDb = new DynamoDBClient({
-  region: 'us-east-1',
-  credentials: {
-    accessKeyId: secrets.AWS_ACCESS_KEY_ID,
-    secretAccessKey: secrets.AWS_SECRET_ACCESS_KEY,
-    sessionToken: secrets.AWS_SESSION_TOKEN,
-  },
-});
 
 export async function POST(req: NextRequest) {
-  const { imageId, password } = await req.json();
+  // Unterdrücke externe Ressourcenaufrufe während des Builds
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('Build/Entwicklungsmodus: Externe Aufrufe werden übersprungen.');
+    return NextResponse.json({ message: 'Build/Entwicklung: Externe Aufrufe übersprungen' });
+  }
+
+  const { imageId, password } = await req.json(); // Anfrage-Daten
 
   try {
-    // Daten aus DynamoDB abrufen
+    // AWS-DynamoDB-Client initialisieren
+    const dynamoDb = new DynamoDBClient({ region: 'us-east-1' });
     const dbParams = {
       TableName: 'images',
       Key: {
-        imageID: imageId, // Der Primärschlüssel
+        imageID: imageId,
       },
     };
-
     const data = await dynamoDb.send(new GetCommand(dbParams));
 
     if (!data.Item) {
@@ -41,7 +33,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Falsches Passwort' }, { status: 401 });
     }
 
-    // Erfolgreich: Image URL zurückgeben
+    // Erfolgreich: Bild-URL zurückgeben
     return NextResponse.json({ imageUrl: data.Item.imageUrl });
   } catch (error) {
     console.error('Fehler beim Abrufen des Bildes:', error);
