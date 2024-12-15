@@ -2,24 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { GetCommand } from '@aws-sdk/lib-dynamodb';
 import bcrypt from 'bcryptjs';
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
+import { sdkStreamMixin } from '@aws-sdk/util-stream-node';
 
 export async function POST(req: NextRequest) {
-  // Unterdrücke externe Ressourcenaufrufe während des Builds
-  //if (process.env.NODE_ENV !== 'production') {
-  //  console.log('Build/Entwicklungsmodus: Externe Aufrufe werden übersprungen.');
-  //  return NextResponse.json({ message: 'Build/Entwicklung: Externe Aufrufe übersprungen' });
-  //}
-
-  const { imageId, password } = await req.json(); // Anfrage-Daten
+  const { imageId, password } = await req.json();
 
   try {
-    // AWS-DynamoDB-Client initialisieren
     const dynamoDb = new DynamoDBClient({ region: 'us-east-1' });
     const dbParams = {
-      TableName: 'images',
-      Key: {
-        imageID: imageId,
-      },
+      TableName: 'imghost-pictures-database',
+      Key: { imageID: imageId },
     };
     const data = await dynamoDb.send(new GetCommand(dbParams));
 
@@ -27,14 +20,30 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'Bild nicht gefunden' }, { status: 404 });
     }
 
-    // Passwort überprüfen
     const isPasswordValid = bcrypt.compareSync(password, data.Item.hashedPassword);
     if (!isPasswordValid) {
       return NextResponse.json({ message: 'Falsches Passwort' }, { status: 401 });
     }
 
-    // Erfolgreich: Bild-URL zurückgeben
-    return NextResponse.json({ imageUrl: data.Item.imageUrl });
+    const s3 = new S3Client({ region: 'us-east-1' });
+    const command = new GetObjectCommand({
+      Bucket: 'imghost-pictures',
+      Key: data.Item.s3Key,
+    });
+    const s3Response = await s3.send(command);
+
+    // Mixin anwenden, um den Stream asynchron iterierbar zu machen
+    const mixedStream = sdkStreamMixin(s3Response.Body);
+    const chunks = [];
+    for await (const chunk of mixedStream) {
+      chunks.push(chunk);
+    }
+    const buffer = Buffer.concat(chunks);
+
+    const headers = new Headers();
+    headers.set('Content-Type', 'image/jpeg');
+
+    return new NextResponse(buffer, { status: 200, headers });
   } catch (error) {
     console.error('Fehler beim Abrufen des Bildes:', error);
     return NextResponse.json({ message: 'Fehler beim Abrufen des Bildes', error }, { status: 500 });

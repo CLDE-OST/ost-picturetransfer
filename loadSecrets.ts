@@ -11,6 +11,7 @@ export function loadSecrets() {
     ).toString();
 
     // Umwandeln von JSON in ein JS-Objekt
+    console.log('Secrets geladen:', secretString);
     return JSON.parse(secretString);
   } catch (error) {
     console.error('Fehler beim Laden der Secrets:', error);
