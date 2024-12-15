@@ -128,6 +128,22 @@ export default function App() {
                   </Button>
                   <div className="flex">
                     <Input readOnly value={uploadLink} className="flex-grow" />
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          onClick={() => {
+                            navigator.clipboard.writeText(uploadLink);
+                            setTimeout(() => setErrorMessage(''), 2000);
+                          }}
+                          className="ml-2"
+                        >
+                          <Clipboard />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-fit bg-white text-black">
+                        <p className="text-xs">Copied to Clipboard</p>
+                      </PopoverContent>
+                    </Popover>
                   </div>
 
                 </div>
