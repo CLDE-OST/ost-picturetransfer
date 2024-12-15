@@ -60,7 +60,7 @@ export default function App() {
       <Card className="shadow-sm border">
         <CardHeader>
           <CardTitle>Upload your Image</CardTitle>
-          <CardDescription>Supported are only imagefiles up to 2MB</CardDescription>
+          <CardDescription>Only image files (e.g., JPG, JPEG, PNG, GIF, BMP, TIFF, WEBP) up to 2MB are supported. All uploaded images will be deleted after 7 days.</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-5">
           {!uploadLink && (

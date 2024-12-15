@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "imgHOST",
-  description: "made with ALOT of pain",
+  description: "made with security in mind",
 };
 
 export default function RootLayout({

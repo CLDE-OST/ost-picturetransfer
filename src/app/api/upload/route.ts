@@ -46,9 +46,9 @@ export async function POST(req: NextRequest) {
 
     const host = req.headers.get('host') || 'http://localhost:3000';
     const generatedLink = `${host}/${imageId}`;
-    return NextResponse.json({ message: 'Bild hochgeladen', link: generatedLink });
+    return NextResponse.json({ message: 'Image uploaded', link: generatedLink });
   } catch (error) {
-    console.error('Fehler beim Upload:', error);
-    return NextResponse.json({ message: 'Fehler beim Upload', error }, { status: 500 });
+    console.error('Error during upload:', error);
+    return NextResponse.json({ message: 'Error during upload', error }, { status: 500 });
   }
 }

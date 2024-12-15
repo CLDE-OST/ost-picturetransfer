@@ -32,9 +32,9 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
       setErrorMessage("");
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
-        setErrorMessage(error.response?.data?.message || "Fehler beim Abrufen des Bildes");
+        setErrorMessage(error.response?.data?.message || "Error when retrieving the image");
       } else {
-        setErrorMessage("Ein unbekannter Fehler ist aufgetreten");
+        setErrorMessage("An unknown error has occurred");
       }
     } finally {
       setIsLoading(false);
@@ -51,7 +51,7 @@ export default function ViewImage({ params }: { params: Promise<{ imageId: strin
             transition={{ ease: "circInOut", duration: 0.3 }}
             className='-mt-10'
           >
-            <Image isBlurred height={700} src={imageUrl} alt="Angezeigtes Bild" />
+            <Image isBlurred height={700} src={imageUrl} alt="Displayed image" />
           </motion.div>
         ) : (
           <div className="container flex flex-col items-center text-center space-y-4 mx-auto">
