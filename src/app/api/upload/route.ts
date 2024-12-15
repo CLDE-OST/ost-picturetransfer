@@ -4,15 +4,25 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { PutCommand } from '@aws-sdk/lib-dynamodb';
 import bcrypt from 'bcryptjs';
 
-export async function POST(req: NextRequest) {
-  // Unterdrücke externe Ressourcenaufrufe während des Builds
-  //if (process.env.NODE_ENV !== 'production') {
-  //  console.log('Build/Entwicklungsmodus: Externe Aufrufe werden übersprungen.');
-  //  return NextResponse.json({ message: 'Build/Entwicklung: Externe Aufrufe übersprungen' });
-  //}
+// Funktion zum automatischen Generieren der Image-ID
+function generateImageId() {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let randomPart = '';
+  for (let i = 0; i < 8; i++) {
+    randomPart += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  const timestamp = Date.now(); // Zeitstempel
+  const randomNumber = Math.floor(Math.random() * 1000000); // Zufallszahl
+  return `${randomNumber}${randomPart}${timestamp}`;
+}
 
+export async function POST(req: NextRequest) {
   const { file, password } = await req.json(); // Anfrage-Daten
-  const imageId = Date.now().toString(); // Unique ID für das Bild
+
+  // Automatisch generierte Image-ID
+  const imageId = generateImageId();
+  console.log('Generated Image ID:', imageId);
+
   const hashedPassword = bcrypt.hashSync(password, 10); // Passwort hash-en
 
   try {
@@ -48,4 +58,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: 'Fehler beim Upload', error }, { status: 500 });
   }
 }
-
