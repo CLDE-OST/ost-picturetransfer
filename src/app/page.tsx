@@ -3,7 +3,6 @@ import Upload from "@/components/Upload";
 import WordPullUp from "@/components/ui/word-pull-up";
 import { FadeText } from "@/components/ui/fade-text";
 import AnimatedShinyText from "@/components/ui/animated-shiny-text";
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
 export default function Home() {
