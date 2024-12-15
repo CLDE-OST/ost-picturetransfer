@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
   try {
     const s3 = new S3Client({ region: 'us-east-1' });
     const uploadParams = {
-      Bucket: 'imghost-pictures',
+      Bucket: 'bucket-mit-cooli-bilder',
       Key: `${imageId}.jpg`,
       Body: Buffer.from(file, 'base64'),
       ContentType: 'image/jpeg',
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
 
     const dynamoDb = new DynamoDBClient({ region: 'us-east-1' });
     const dbParams = {
-      TableName: 'imghost-pictures-database',
+      TableName: 'images',
       Item: {
         imageID: imageId,
         hashedPassword,

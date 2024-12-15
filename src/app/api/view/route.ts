@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   try {
     const dynamoDb = new DynamoDBClient({ region: 'us-east-1' });
     const dbParams = {
-      TableName: 'imghost-pictures',
+      TableName: 'images',
       Key: { imageID: imageId },
     };
     const data = await dynamoDb.send(new GetCommand(dbParams));
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     const s3 = new S3Client({ region: 'us-east-1' });
     const command = new GetObjectCommand({
-      Bucket: 'imghost-pictures-database',
+      Bucket: 'bucket-mit-cooli-bilder',
       Key: data.Item.s3Key,
     });
     const s3Response = await s3.send(command);
