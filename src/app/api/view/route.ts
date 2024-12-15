@@ -5,10 +5,10 @@ import bcrypt from 'bcryptjs';
 
 export async function POST(req: NextRequest) {
   // Unterdrücke externe Ressourcenaufrufe während des Builds
-  if (process.env.NODE_ENV !== 'production') {
-    console.log('Build/Entwicklungsmodus: Externe Aufrufe werden übersprungen.');
-    return NextResponse.json({ message: 'Build/Entwicklung: Externe Aufrufe übersprungen' });
-  }
+  //if (process.env.NODE_ENV !== 'production') {
+  //  console.log('Build/Entwicklungsmodus: Externe Aufrufe werden übersprungen.');
+  //  return NextResponse.json({ message: 'Build/Entwicklung: Externe Aufrufe übersprungen' });
+  //}
 
   const { imageId, password } = await req.json(); // Anfrage-Daten
 
