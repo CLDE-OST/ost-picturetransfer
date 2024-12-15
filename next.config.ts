@@ -3,9 +3,9 @@ import { loadSecrets } from './loadSecrets';
 
 const secrets = loadSecrets(); // Secrets aus dem Secrets Manager laden
 
-console.log("AWS_ACCESS_KEY_ID:", secrets.AWS_ACCESS_KEY_ID);
-console.log("AWS_SECRET_ACCESS_KEY:", secrets.AWS_SECRET_ACCESS_KEY);
-console.log("AWS_SESSION_TOKEN:", secrets.AWS_SESSION_TOKEN);
+// console.log("AWS_ACCESS_KEY_ID:", secrets.AWS_ACCESS_KEY_ID);
+// console.log("AWS_SECRET_ACCESS_KEY:", secrets.AWS_SECRET_ACCESS_KEY);
+// console.log("AWS_SESSION_TOKEN:", secrets.AWS_SESSION_TOKEN);
 
 module.exports = {
   eslint: {
