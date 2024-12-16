@@ -17,7 +17,7 @@ NOTE: Everything was performed on a MacOS, so some steps may be a bit different.
 2. Clone the repo
 3. Navigate to the directory
 4. npm install to install dependencies
-6. Change the bucket and dynamodb names in route.ts in view and upload
+6. Change the S3 Bucketname and DynamoDB Tablename in route.ts in /view and /upload
 7. Set the tokens via AWSCLI
 8. npm build and npm run
 
