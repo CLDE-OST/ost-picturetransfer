@@ -1,24 +1,20 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CLDE Picture Hoster
 
-## Requirements
-- AWS Account
-- SSH Client (Mac/Windows)
-- AWS CLI
+This project was developed as part of a school assignment. It is a lightweight picture hosting application that allows users to upload, preview, and share images.
 
-NOTE: Everything was performed on a MacOS, so some steps may be a bit different.
+## Features
 
-## Preparation
-- Create a S3 Bucket
-- Create a DynamoDB (Partition Key should be imageID, the others should be left empty.)
-- EC2 Instance
+- Image upload with preview and direct shareable links
+- Simple image gallery with basic management options
+- Backend infrastructure deployed using AWS
 
-## Installation
-1. Login to your EC2 via SSH
-2. Clone the repo
-3. Navigate to the directory
-4. npm install to install dependencies
-6. Change the S3 Bucketname and DynamoDB Tablename in route.ts in /view and /upload
-7. Set the tokens via AWSCLI
-8. npm build and npm run
+## Tech Stack
 
-
+- **Next.js** – React-based web framework
+- **TypeScript** – Static typing for better code reliability
+- **Tailwind CSS** – Utility-first CSS framework
+- **shadcn/ui** – UI component library based on Radix and Tailwind
+- **Amazon Web Services (AWS)**:
+  - **S3** for image storage
+  - **DynamoDB** for metadata and records
+  - **EC2/server instances** for hosting backend services
